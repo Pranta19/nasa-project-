@@ -329,5 +329,29 @@
             100% { transform: translateX(-100px) translateY(20px) scale(1.2); opacity: 0; }
         }
     </style>
+    <script>
+  // Connect to WebSocket backend
+  const ws = new WebSocket("ws://localhost:5000");
+
+  ws.onopen = () => {
+    console.log("Connected to backend");
+  };
+
+  ws.onmessage = (msg) => {
+    console.log("Received:", msg.data);
+    // You can also update the alert feed dynamically:
+    const alertFeed = document.getElementById("alert-feed");
+    const p = document.createElement("p");
+    p.textContent = msg.data;
+    p.className = "text-sm text-green-400"; // optional styling
+    alertFeed.prepend(p);
+
+    // Keep only 20 messages
+    if (alertFeed.children.length > 20) {
+      alertFeed.removeChild(alertFeed.lastChild);
+    }
+  };
+</script>
+
 </body>
 </html>
