@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orbital Shield AI - Real-Time Space Debris Alert System</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide-react@0.291.0/dist/lucide-react.js"></script>
+    <script src="https://unpkg.com/lucide-icons@0.372.0"></script>
+
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0a0e1a; /* A very dark blue */
+            color: #e0e0e0;
+        }
+        .glass-effect {
+            background: rgba(16, 22, 42, 0.6);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .hero-glow {
+            box-shadow: 0 0 80px rgba(56, 189, 248, 0.3), 0 0 120px rgba(79, 70, 229, 0.2);
+        }
+        
+        /* Animation for debris and satellites */
+        @keyframes orbit {
+            0% { transform: translateX(-100px) translateY(50px) scale(0.8); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateX(calc(100% + 100px)) translateY(-50px) scale(1.2); opacity: 0; }
+        }
+        
+        .space-object {
+            position: absolute;
+            border-radius: 50%;
+            animation-name: orbit;
+            animation-timing-function: linear;
+            animation-iteration-count: infinite;
+        }
+
+        .satellite { background-color: #38bdf8; width: 6px; height: 6px; box-shadow: 0 0 10px #38bdf8; }
+        .debris { background-color: #f87171; width: 3px; height: 3px; }
+        
+        .alert-feed p {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="overflow-x-hidden">
+
+    <!-- Header -->
+    <header class="fixed top-0 left-0 right-0 z-50 glass-effect">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-sky-400">
+                    <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M2 17L12 22L22 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <h1 class="text-xl font-bold text-white">Orbital Shield AI</h1>
+            </div>
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="#dashboard" class="hover:text-sky-400 transition-colors">Live Dashboard</a>
+                <a href="#solution" class="hover:text-sky-400 transition-colors">Our Solution</a>
+                <a href="#how-it-works" class="hover:text-sky-400 transition-colors">How It Works</a>
+                <a href="#contact" class="bg-sky-500 hover:bg-sky-600 text-white font-semibold px-4 py-2 rounded-lg transition-colors">Request a Demo</a>
+            </div>
+            <div class="md:hidden">
+                <!-- Mobile Menu Button can be added here -->
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="relative h-screen flex items-center justify-center text-center overflow-hidden pt-16">
+            <div class="absolute inset-0 bg-gradient-to-b from-[#0a0e1a] via-[#0a0e1a]/80 to-transparent z-10"></div>
+            <div class="absolute inset-0 bg-grid-pattern opacity-10"></div>
+            <img src="https://placehold.co/1920x1080/0a0e1a/FFFFFF?text=+" alt="Earth from space" class="absolute inset-0 w-full h-full object-cover opacity-20">
+            
+            <div class="relative z-20 container mx-auto px-6">
+                <h2 class="text-4xl md:text-6xl lg:text-7xl font-black text-white leading-tight hero-glow">
+                    Predict. Protect. Prevail.
+                </h2>
+                <p class="mt-6 text-lg md:text-xl max-w-3xl mx-auto text-gray-300">
+                    Orbital Shield AI provides an autonomous, real-time alert system to protect critical satellite infrastructure from the growing threat of space debris.
+                </p>
+                <div class="mt-10 flex justify-center gap-4">
+                    <a href="#dashboard" class="bg-sky-500 hover:bg-sky-600 text-white font-bold py-3 px-8 rounded-full transition-transform transform hover:scale-105">View Live Dashboard</a>
+                    <a href="#solution" class="bg-white/10 hover:bg-white/20 text-white font-bold py-3 px-8 rounded-full transition-colors">Learn More</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- The Problem Section -->
+        <section class="py-20 md:py-32 bg-[#0a0e1a]">
+            <div class="container mx-auto px-6 text-center">
+                <h3 class="text-3xl md:text-4xl font-bold text-white">The Escalating Threat in Orbit</h3>
+                <p class="mt-4 max-w-3xl mx-auto text-gray-400">
+                    Millions of pieces of debris are hurtling through space at speeds over 17,500 mph. A single collision can be catastrophic, costing millions and endangering missions and human lives.
+                </p>
+                <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="glass-effect p-8 rounded-xl">
+                        <p class="text-5xl font-bold text-sky-400">>900,000</p>
+                        <p class="mt-2 text-gray-300">Debris objects >1cm tracked</p>
+                    </div>
+                    <div class="glass-effect p-8 rounded-xl">
+                        <p class="text-5xl font-bold text-sky-400">17,500+ mph</p>
+                        <p class="mt-2 text-gray-300">Average orbital velocity</p>
+                    </div>
+                    <div class="glass-effect p-8 rounded-xl">
+                        <p class="text-5xl font-bold text-sky-400">$700+ Billion</p>
+                        <p class="mt-2 text-gray-300">Satellite industry value at risk</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Live Dashboard Prototype -->
+        <section id="dashboard" class="py-20 md:py-32 bg-gradient-to-b from-[#10162a] to-[#0a0e1a]">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h3 class="text-3xl md:text-4xl font-bold text-white">Live Orbital Environment Dashboard</h3>
+                    <p class="mt-4 max-w-2xl mx-auto text-gray-400">This is a real-time simulation of our tracking and alert system.</p>
+                </div>
+
+                <div class="glass-effect rounded-xl p-4 md:p-6 lg:flex gap-6">
+                    <!-- Map -->
+                    <div class="flex-grow lg:w-2/3 relative h-96 md:h-[500px] rounded-lg overflow-hidden border border-white/10">
+                        <img src="https://placehold.co/800x600/0a0e1a/38bdf8?text=Earth+Map" alt="World Map for background" class="w-full h-full object-cover opacity-30">
+                        <div id="map-container" class="absolute inset-0">
+                            <!-- JS will populate this -->
+                        </div>
+                    </div>
+                    
+                    <!-- Sidebar -->
+                    <div class="flex-shrink-0 lg:w-1/3 mt-6 lg:mt-0">
+                        <div class="bg-black/20 p-4 rounded-lg h-full flex flex-col">
+                           <h4 class="text-lg font-semibold text-white mb-4">Real-Time Alert Feed</h4>
+                           <div id="alert-feed" class="flex-grow space-y-3 overflow-y-auto h-80 pr-2">
+                               <!-- JS will populate this -->
+                           </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Our Solution Section -->
+        <section id="solution" class="py-20 md:py-32">
+            <div class="container mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h3 class="text-3xl md:text-4xl font-bold text-white">Our Solution: Proactive Collision Avoidance</h3>
+                    <p class="mt-6 text-gray-400 leading-relaxed">
+                        Orbital Shield AI is an intelligent platform that moves beyond simple tracking. We use predictive AI models to analyze trajectories, identify high-risk conjunctions, and deliver actionable alerts directly to satellite operators—long before a potential collision becomes an imminent threat.
+                    </p>
+                    <ul class="mt-8 space-y-4">
+                        <li class="flex items-start">
+                            <i data-lucide="check-circle-2" class="w-6 h-6 text-sky-400 mr-3 mt-1"></i>
+                            <span><strong class="text-white">Reduce Operational Costs:</strong> Minimize fuel consumption from unnecessary avoidance maneuvers.</span>
+                        </li>
+                        <li class="flex items-start">
+                             <i data-lucide="shield-check" class="w-6 h-6 text-sky-400 mr-3 mt-1"></i>
+                            <span><strong class="text-white">Protect High-Value Assets:</strong> Safeguard your satellites from catastrophic damage.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i data-lucide="users" class="w-6 h-6 text-sky-400 mr-3 mt-1"></i>
+                            <span><strong class="text-white">Ensure Mission Success:</strong> Keep your services online and your astronauts safe.</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="flex justify-center items-center">
+                    <img src="https://placehold.co/600x600/10162a/38bdf8?text=Satellite+Network" alt="Satellite network graphic" class="rounded-xl shadow-2xl shadow-sky-900/50">
+                </div>
+            </div>
+        </section>
+
+        <!-- How It Works Section -->
+        <section id="how-it-works" class="py-20 md:py-32 bg-gradient-to-b from-[#0a0e1a] to-[#10162a]">
+             <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h3 class="text-3xl md:text-4xl font-bold text-white">A Simple, Powerful Workflow</h3>
+                    <p class="mt-4 max-w-2xl mx-auto text-gray-400">Our system works in a continuous, automated loop to provide maximum protection with minimum overhead.</p>
+                </div>
+                <div class="grid md:grid-cols-3 gap-8 text-center">
+                    <div class="glass-effect p-8 rounded-xl">
+                        <div class="flex justify-center mb-4">
+                            <div class="bg-sky-900/50 p-4 rounded-full">
+                                <i data-lucide="database-zap" class="w-10 h-10 text-sky-400"></i>
+                            </div>
+                        </div>
+                        <h4 class="text-xl font-bold text-white">1. Data Ingestion</h4>
+                        <p class="mt-2 text-gray-400">We aggregate orbital data from multiple public and private sources, including TLE catalogs, for a comprehensive view of the space environment.</p>
+                    </div>
+                    <div class="glass-effect p-8 rounded-xl">
+                         <div class="flex justify-center mb-4">
+                            <div class="bg-sky-900/50 p-4 rounded-full">
+                                <i data-lucide="brain-circuit" class="w-10 h-10 text-sky-400"></i>
+                            </div>
+                        </div>
+                        <h4 class="text-xl font-bold text-white">2. AI-Powered Prediction</h4>
+                        <p class="mt-2 text-gray-400">Our machine learning models analyze millions of trajectories to forecast potential collisions with high accuracy, filtering out low-risk events.</p>
+                    </div>
+                    <div class="glass-effect p-8 rounded-xl">
+                         <div class="flex justify-center mb-4">
+                            <div class="bg-sky-900/50 p-4 rounded-full">
+                                <i data-lucide="siren" class="w-10 h-10 text-sky-400"></i>
+                            </div>
+                        </div>
+                        <h4 class="text-xl font-bold text-white">3. Real-Time Alerting</h4>
+                        <p class="mt-2 text-gray-400">High-risk threats trigger instant, actionable alerts with detailed conjunction data, sent directly to your operations center via API or dashboard.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact / CTA Section -->
+        <section id="contact" class="py-20 md:py-32">
+            <div class="container mx-auto px-6 text-center">
+                 <h3 class="text-3xl md:text-4xl font-bold text-white">Secure Your Place in Orbit</h3>
+                 <p class="mt-4 max-w-2xl mx-auto text-gray-400">
+                    Don't leave the safety of your multi-million dollar assets to chance. Partner with Orbital Shield AI and bring predictive protection to your fleet.
+                </p>
+                <div class="mt-10">
+                     <a href="#" class="bg-sky-500 hover:bg-sky-600 text-white font-bold py-4 px-10 rounded-full transition-transform transform hover:scale-105 text-lg">Request a Demo</a>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <!-- Footer -->
+    <footer class="bg-black/30 border-t border-white/10 py-8">
+        <div class="container mx-auto px-6 text-center text-gray-500">
+            <p>&copy; 2025 Orbital Shield AI. All rights reserved.</p>
+            <p class="text-sm mt-2">Pioneering a safer future for space exploration and operations.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // --- Dashboard Simulation Script ---
+        document.addEventListener('DOMContentLoaded', function() {
+            const mapContainer = document.getElementById('map-container');
+            const alertFeed = document.getElementById('alert-feed');
+            
+            const numSatellites = 15;
+            const numDebris = 30;
+
+            const satelliteNames = ['INTELSAT-34', 'STARLINK-2021', 'TERRA-1', 'AQUA', 'GOES-18', 'SAT-X'];
+            const debrisNames = ['SL-16 R/B', 'FENGYUN 1C DEB', 'IRIDIUM 33 DEB', 'COSMOS 2251 DEB', 'PSLV R/B'];
+
+            function createSpaceObject(type) {
+                const obj = document.createElement('div');
+                obj.classList.add('space-object', type);
+                
+                const startY = Math.random() * 100;
+                const duration = 10 + Math.random() * 20; // 10-30 seconds
+                const delay = Math.random() * 20;
+
+                obj.style.top = `${startY}%`;
+                obj.style.animationDuration = `${duration}s`;
+                obj.style.animationDelay = `-${delay}s`;
+                
+                // Add varied animation paths
+                if (Math.random() > 0.5) {
+                    obj.style.animationName = 'orbitReverse'; // A potential second animation
+                }
+
+                mapContainer.appendChild(obj);
+            }
+
+            function addAlert() {
+                const p = document.createElement('p');
+                const timestamp = new Date().toLocaleTimeString('en-US', { hour12: false });
+                
+                const isHighRisk = Math.random() > 0.7; // 30% chance of high risk
+                const sat = satelliteNames[Math.floor(Math.random() * satelliteNames.length)];
+                const deb = debrisNames[Math.floor(Math.random() * debrisNames.length)];
+                const distance = (Math.random() * 5 + 0.5).toFixed(2); // 0.5km to 5.5km
+
+                if (isHighRisk) {
+                    p.className = 'text-sm text-red-400';
+                    p.innerHTML = `[<span class="font-bold">CRITICAL</span>] ${timestamp}: High-probability conjunction between <strong class="text-red-300">${sat}</strong> and <strong class="text-red-300">${deb}</strong>. Predicted miss: ${distance} km.`;
+                } else {
+                    p.className = 'text-sm text-yellow-400';
+                    p.innerHTML = `[<span class="font-bold">MONITOR</span>] ${timestamp}: Conjunction watch for ${sat} and ${deb}. Predicted miss: ${distance} km.`;
+                }
+                
+                alertFeed.prepend(p);
+
+                // Limit number of alerts
+                if (alertFeed.children.length > 20) {
+                    alertFeed.removeChild(alertFeed.lastChild);
+                }
+            }
+
+            // Initial population
+            for (let i = 0; i < numSatellites; i++) createSpaceObject('satellite');
+            for (let i = 0; i < numDebris; i++) createSpaceObject('debris');
+            
+            // Start the alert feed
+            addAlert(); // Add one immediately
+            setInterval(addAlert, 4000 + Math.random() * 2000); // New alert every 4-6 seconds
+
+        });
+    </script>
+    <!-- Add a reverse animation for more variety -->
+    <style>
+        @keyframes orbitReverse {
+            0% { transform: translateX(calc(100% + 100px)) translateY(-20px) scale(0.8); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateX(-100px) translateY(20px) scale(1.2); opacity: 0; }
+        }
+    </style>
+</body>
+</html>
