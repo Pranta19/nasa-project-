@@ -1,0 +1,108 @@
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #0a0f1c;
+  color: #e0e0e0;
+}
+
+.dashboard {
+  padding: 20px;
+  max-width: 1200px;
+  margin: auto;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-bottom: 30px;
+}
+
+.title, .status {
+  flex: 1;
+  min-width: 300px;
+}
+
+.title h1 {
+  color: #00ffff;
+  font-size: 2em;
+  margin-bottom: 10px;
+}
+
+.tracked {
+  color: #00ffcc;
+}
+
+.conjunctions {
+  color: #ffcc00;
+}
+
+.maneuvers {
+  color: #ff6666;
+}
+
+.status h2 {
+  color: #ff6f61;
+  font-size: 1.5em;
+}
+
+.high-risk {
+  color: #ff4444;
+  font-weight: bold;
+}
+
+.globe {
+  margin-top: 10px;
+  font-size: 1.2em;
+  background-color: #1c2230;
+  padding: 10px;
+  border-radius: 8px;
+  display: inline-block;
+  color: #00ffff;
+}
+
+main {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.screening, .alerts {
+  flex: 1;
+  min-width: 400px;
+  background-color: #1a1f2b;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px #00ffff33;
+}
+
+.screening h3, .alerts h3 {
+  color: #00ffff;
+  margin-bottom: 15px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+th, td {
+  padding: 10px;
+  border-bottom: 1px solid #444;
+  text-align: left;
+}
+
+th {
+  background-color: #2a2f3d;
+  color: #00ffff;
+}
+
+.high {
+  color: #ff4444;
+  font-weight: bold;
+}
+
+.medium {
+  color: #ffcc00;
+}
